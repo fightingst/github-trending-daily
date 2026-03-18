@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GitHub Trending 日报 - 2026年03月18日</title>
+    <title>GitHub Trending · 2026.03.18</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -15,395 +15,182 @@
         }
         
         :root {
-            --bg-dark: #030712;
-            --bg-card: rgba(15, 23, 42, 0.6);
-            --neon-cyan: #00f5ff;
-            --neon-pink: #ff00ff;
-            --neon-purple: #bf00ff;
-            --neon-green: #00ff88;
-            --neon-yellow: #ffff00;
-            --text-primary: #ffffff;
-            --text-secondary: rgba(255, 255, 255, 0.7);
-            --text-muted: rgba(255, 255, 255, 0.5);
+            /* Minimalist 配色 - 来自 ui-ux-pro-max-plus */
+            --bg-primary: #ffffff;
+            --bg-secondary: #f8fafc;
+            --bg-tertiary: #f1f5f9;
+            --text-primary: #0f172a;
+            --text-secondary: #475569;
+            --text-muted: #94a3b8;
+            --accent: #0f172a;
+            --accent-light: #1e293b;
+            --border: #e2e8f0;
+            --border-light: #f1f5f9;
+            --success: #10b981;
+            --warning: #f59e0b;
         }
         
         body {
-            font-family: 'Space Grotesk', -apple-system, sans-serif;
-            background: var(--bg-dark);
-            min-height: 100vh;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-primary);
             color: var(--text-primary);
-            overflow-x: hidden;
-            position: relative;
-        }
-        
-        /* 动态网格背景 */
-        .grid-bg {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: 
-                linear-gradient(rgba(0, 245, 255, 0.03) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(0, 245, 255, 0.03) 1px, transparent 1px);
-            background-size: 50px 50px;
-            animation: gridMove 20s linear infinite;
-            pointer-events: none;
-            z-index: 0;
-        }
-        
-        @keyframes gridMove {
-            0% { transform: perspective(500px) rotateX(60deg) translateY(0); }
-            100% { transform: perspective(500px) rotateX(60deg) translateY(50px); }
-        }
-        
-        /* 扫描线效果 */
-        .scanline {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 4px;
-            background: linear-gradient(90deg, transparent, var(--neon-cyan), transparent);
-            animation: scanline 3s linear infinite;
-            pointer-events: none;
-            z-index: 100;
-            opacity: 0.5;
-        }
-        
-        @keyframes scanline {
-            0% { top: -4px; }
-            100% { top: 100%; }
-        }
-        
-        /* 浮动粒子 */
-        .particles {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 1;
-            overflow: hidden;
-        }
-        
-        .particle {
-            position: absolute;
-            width: 4px;
-            height: 4px;
-            border-radius: 50%;
-            background: var(--neon-cyan);
-            box-shadow: 0 0 10px var(--neon-cyan), 0 0 20px var(--neon-cyan);
-            animation: float 15s infinite;
-            opacity: 0.6;
-        }
-        
-        .particle:nth-child(2n) {
-            background: var(--neon-pink);
-            box-shadow: 0 0 10px var(--neon-pink), 0 0 20px var(--neon-pink);
-        }
-        
-        .particle:nth-child(3n) {
-            background: var(--neon-purple);
-            box-shadow: 0 0 10px var(--neon-purple), 0 0 20px var(--neon-purple);
-        }
-        
-        @keyframes float {
-            0%, 100% {
-                transform: translateY(100vh) rotate(0deg);
-                opacity: 0;
-            }
-            10% {
-                opacity: 0.6;
-            }
-            90% {
-                opacity: 0.6;
-            }
-            100% {
-                transform: translateY(-100vh) rotate(720deg);
-                opacity: 0;
-            }
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
         
         .container {
-            position: relative;
-            z-index: 10;
-            max-width: 1400px;
+            max-width: 1200px;
             margin: 0 auto;
-            padding: 40px 24px;
+            padding: 0 24px;
         }
         
-        /* Header - 霓虹风格 */
+        /* Header - 极简风格 */
         header {
-            text-align: center;
-            padding: 60px 24px;
-            margin-bottom: 40px;
-            position: relative;
+            padding: 80px 0 60px;
+            border-bottom: 1px solid var(--border);
         }
         
-        .header-glow {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 600px;
-            height: 300px;
-            background: radial-gradient(ellipse, rgba(0, 245, 255, 0.15) 0%, transparent 70%);
-            pointer-events: none;
-            animation: pulse 4s ease-in-out infinite;
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            gap: 24px;
         }
         
-        @keyframes pulse {
-            0%, 100% { opacity: 0.5; transform: translate(-50%, -50%) scale(1); }
-            50% { opacity: 1; transform: translate(-50%, -50%) scale(1.1); }
-        }
-        
-        header h1 {
-            font-size: 4rem;
+        .header-left h1 {
+            font-size: 2.5rem;
             font-weight: 700;
-            font-family: 'JetBrains Mono', monospace;
-            letter-spacing: -2px;
-            position: relative;
-            display: inline-block;
-            background: linear-gradient(135deg, var(--neon-cyan) 0%, var(--neon-pink) 50%, var(--neon-purple) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            animation: titleGlow 3s ease-in-out infinite;
+            letter-spacing: -0.02em;
+            margin-bottom: 8px;
         }
         
-        @keyframes titleGlow {
-            0%, 100% { filter: drop-shadow(0 0 20px rgba(0, 245, 255, 0.5)); }
-            50% { filter: drop-shadow(0 0 40px rgba(255, 0, 255, 0.5)); }
-        }
-        
-        .date {
-            font-size: 1.25rem;
-            color: var(--neon-cyan);
-            margin-top: 16px;
-            font-family: 'JetBrains Mono', monospace;
-            text-shadow: 0 0 10px var(--neon-cyan);
+        .header-left .date {
+            font-size: 1rem;
+            color: var(--text-muted);
+            font-weight: 400;
         }
         
         .stats {
             display: flex;
-            justify-content: center;
-            gap: 60px;
-            margin-top: 40px;
+            gap: 48px;
         }
         
         .stat {
-            text-align: center;
-            position: relative;
-            padding: 20px 30px;
-            background: var(--bg-card);
-            border: 1px solid rgba(0, 245, 255, 0.2);
-            border-radius: 12px;
-            backdrop-filter: blur(10px);
-            transition: all 0.3s ease;
-        }
-        
-        .stat:hover {
-            border-color: var(--neon-cyan);
-            box-shadow: 0 0 30px rgba(0, 245, 255, 0.3);
-            transform: translateY(-4px);
+            text-align: right;
         }
         
         .stat-value {
-            font-size: 2.5rem;
-            font-weight: 700;
-            font-family: 'JetBrains Mono', monospace;
-            background: linear-gradient(135deg, var(--neon-cyan), var(--neon-green));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            font-size: 2rem;
+            font-weight: 600;
+            letter-spacing: -0.02em;
         }
         
         .stat-label {
-            font-size: 0.875rem;
-            color: var(--text-secondary);
-            margin-top: 4px;
+            font-size: 0.8125rem;
+            color: var(--text-muted);
             text-transform: uppercase;
-            letter-spacing: 2px;
+            letter-spacing: 0.05em;
+            margin-top: 2px;
         }
         
-        /* Filter Bar */
+        /* Filter */
+        .filter-section {
+            padding: 32px 0;
+            border-bottom: 1px solid var(--border);
+        }
+        
         .filter-bar {
             display: flex;
-            justify-content: center;
-            gap: 12px;
-            margin-bottom: 40px;
+            gap: 8px;
             flex-wrap: wrap;
         }
         
         .filter-btn {
-            padding: 12px 24px;
-            border: 1px solid rgba(0, 245, 255, 0.3);
-            border-radius: 30px;
+            padding: 8px 16px;
+            border: 1px solid var(--border);
+            border-radius: 6px;
             background: transparent;
             color: var(--text-secondary);
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.15s ease;
             font-size: 0.875rem;
             font-weight: 500;
-            font-family: 'JetBrains Mono', monospace;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .filter-btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(0, 245, 255, 0.2), transparent);
-            transition: left 0.5s ease;
-        }
-        
-        .filter-btn:hover::before {
-            left: 100%;
         }
         
         .filter-btn:hover {
-            border-color: var(--neon-cyan);
+            border-color: var(--text-muted);
             color: var(--text-primary);
-            box-shadow: 0 0 20px rgba(0, 245, 255, 0.2);
         }
         
         .filter-btn.active {
-            background: linear-gradient(135deg, var(--neon-cyan) 0%, var(--neon-purple) 100%);
-            border-color: transparent;
-            color: var(--bg-dark);
-            font-weight: 600;
-            box-shadow: 0 0 30px rgba(0, 245, 255, 0.4);
+            background: var(--accent);
+            border-color: var(--accent);
+            color: white;
         }
         
-        /* Projects Grid */
+        /* Projects */
+        .projects-section {
+            padding: 48px 0;
+        }
+        
         .projects-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
-            gap: 24px;
-        }
-        
-        /* Project Card - 赛博朋克风格 */
-        .project-card {
-            background: var(--bg-card);
-            border-radius: 16px;
-            padding: 28px;
-            border: 1px solid rgba(0, 245, 255, 0.1);
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            position: relative;
-            backdrop-filter: blur(12px);
+            grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+            gap: 1px;
+            background: var(--border);
+            border: 1px solid var(--border);
+            border-radius: 12px;
             overflow: hidden;
         }
         
-        .project-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 2px;
-            background: linear-gradient(90deg, var(--neon-cyan), var(--neon-pink), var(--neon-purple));
-            transform: scaleX(0);
-            transition: transform 0.4s ease;
-        }
-        
-        .project-card::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, rgba(0, 245, 255, 0.05) 0%, transparent 50%);
-            opacity: 0;
-            transition: opacity 0.4s ease;
-            pointer-events: none;
+        .project-card {
+            background: var(--bg-primary);
+            padding: 32px;
+            transition: background-color 0.15s ease;
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+            display: block;
         }
         
         .project-card:hover {
-            transform: translateY(-8px) scale(1.02);
-            border-color: rgba(0, 245, 255, 0.3);
-            box-shadow: 
-                0 20px 40px rgba(0, 0, 0, 0.4),
-                0 0 40px rgba(0, 245, 255, 0.1),
-                inset 0 0 40px rgba(0, 245, 255, 0.05);
-        }
-        
-        .project-card:hover::before {
-            transform: scaleX(1);
-        }
-        
-        .project-card:hover::after {
-            opacity: 1;
-        }
-        
-        .rank {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            width: 36px;
-            height: 36px;
-            border-radius: 8px;
-            background: rgba(0, 245, 255, 0.1);
-            border: 1px solid rgba(0, 245, 255, 0.3);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-            font-size: 0.875rem;
-            font-family: 'JetBrains Mono', monospace;
-            color: var(--neon-cyan);
-        }
-        
-        .rank.top3 {
-            background: linear-gradient(135deg, var(--neon-yellow) 0%, var(--neon-cyan) 100%);
-            border: none;
-            color: var(--bg-dark);
-            box-shadow: 0 0 20px rgba(255, 255, 0, 0.4);
-            animation: rankGlow 2s ease-in-out infinite;
-        }
-        
-        @keyframes rankGlow {
-            0%, 100% { box-shadow: 0 0 20px rgba(255, 255, 0, 0.4); }
-            50% { box-shadow: 0 0 30px rgba(255, 255, 0, 0.6); }
+            background: var(--bg-secondary);
         }
         
         .project-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
             margin-bottom: 16px;
-            padding-right: 50px;
+        }
+        
+        .project-info {
+            flex: 1;
+            min-width: 0;
         }
         
         .project-name {
-            font-size: 1.125rem;
+            font-size: 1rem;
             font-weight: 600;
-            font-family: 'JetBrains Mono', monospace;
             color: var(--text-primary);
-            text-decoration: none;
-            display: block;
-            margin-bottom: 6px;
-            word-break: break-all;
-            transition: all 0.3s ease;
-            position: relative;
-        }
-        
-        .project-name:hover {
-            color: var(--neon-cyan);
-            text-shadow: 0 0 10px var(--neon-cyan);
+            margin-bottom: 4px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
         
         .project-author {
             font-size: 0.8125rem;
             color: var(--text-muted);
-            font-family: 'JetBrains Mono', monospace;
         }
         
-        .project-author span {
-            color: var(--neon-pink);
+        .rank {
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            font-family: 'SF Mono', 'Monaco', monospace;
         }
         
         .project-desc {
@@ -411,212 +198,195 @@
             color: var(--text-secondary);
             line-height: 1.6;
             margin-bottom: 20px;
-            min-height: 52px;
+            min-height: 45px;
         }
         
         .project-meta {
             display: flex;
             gap: 20px;
-            flex-wrap: wrap;
-            align-items: center;
+            font-size: 0.8125rem;
         }
         
         .meta-item {
             display: flex;
             align-items: center;
-            gap: 8px;
-            font-size: 0.875rem;
-            font-family: 'JetBrains Mono', monospace;
+            gap: 6px;
+            color: var(--text-muted);
+        }
+        
+        .meta-item svg {
+            width: 14px;
+            height: 14px;
         }
         
         .stars {
-            color: var(--neon-yellow);
-            font-weight: 600;
-            text-shadow: 0 0 10px rgba(255, 255, 0, 0.5);
-        }
-        
-        .stars svg {
-            width: 16px;
-            height: 16px;
-            fill: currentColor;
-            animation: starPulse 1.5s ease-in-out infinite;
-        }
-        
-        @keyframes starPulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.2); }
-        }
-        
-        .language {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            color: var(--text-secondary);
+            color: var(--text-primary);
+            font-weight: 500;
         }
         
         .language-dot {
-            width: 12px;
-            height: 12px;
+            width: 8px;
+            height: 8px;
             border-radius: 50%;
-            box-shadow: 0 0 10px currentColor;
         }
         
         /* Footer */
         footer {
+            padding: 48px 0;
+            border-top: 1px solid var(--border);
             text-align: center;
-            padding: 60px 24px;
-            margin-top: 60px;
-            color: var(--text-muted);
+        }
+        
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+        
+        .footer-text {
             font-size: 0.875rem;
-            border-top: 1px solid rgba(0, 245, 255, 0.1);
-            position: relative;
+            color: var(--text-muted);
         }
         
-        footer::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 200px;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, var(--neon-cyan), transparent);
+        .footer-links {
+            display: flex;
+            gap: 24px;
         }
         
-        footer a {
-            color: var(--neon-cyan);
+        .footer-links a {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
             text-decoration: none;
-            transition: all 0.3s ease;
+            transition: color 0.15s ease;
         }
         
-        footer a:hover {
-            color: var(--neon-pink);
-            text-shadow: 0 0 10px var(--neon-pink);
+        .footer-links a:hover {
+            color: var(--text-primary);
         }
         
-        /* 响应式设计 */
+        /* 响应式 */
         @media (max-width: 768px) {
-            header h1 {
-                font-size: 2.5rem;
+            header {
+                padding: 48px 0 40px;
+            }
+            
+            .header-content {
+                flex-direction: column;
+                gap: 32px;
+            }
+            
+            .stats {
+                width: 100%;
+                justify-content: flex-start;
+                gap: 32px;
+            }
+            
+            .stat {
+                text-align: left;
+            }
+            
+            .header-left h1 {
+                font-size: 2rem;
             }
             
             .projects-grid {
                 grid-template-columns: 1fr;
+                border-radius: 8px;
             }
             
-            .stats {
-                gap: 20px;
-                flex-wrap: wrap;
+            .project-card {
+                padding: 24px;
             }
             
-            .stat-value {
-                font-size: 2rem;
-            }
-            
-            .filter-bar {
-                gap: 8px;
-            }
-            
-            .filter-btn {
-                padding: 10px 18px;
-                font-size: 0.8125rem;
+            .footer-content {
+                flex-direction: column;
+                text-align: center;
             }
         }
         
-        /* 加载动画 */
+        /* 动画 */
         .fade-in {
-            animation: fadeIn 0.6s ease forwards;
-            opacity: 0;
+            animation: fadeIn 0.3s ease forwards;
         }
         
         @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(8px); }
             to { opacity: 1; transform: translateY(0); }
-        }
-        
-        .project-card {
-            opacity: 0;
-            transform: translateY(20px);
         }
     </style>
 </head>
 <body>
-    <!-- 背景效果 -->
-    <div class="grid-bg"></div>
-    <div class="scanline"></div>
-    <div class="particles" id="particles"></div>
-    
     <div class="container">
         <header>
-            <div class="header-glow"></div>
-            <h1>🔥 GITHUB TRENDING</h1>
-            <div class="date">// 2026.03.18 • DAILY DIGEST</div>
-            <div class="stats">
-                <div class="stat fade-in" style="animation-delay: 0.1s">
-                    <div class="stat-value">15</div>
-                    <div class="stat-label">Projects</div>
+            <div class="header-content">
+                <div class="header-left">
+                    <h1>GitHub Trending</h1>
+                    <div class="date">Wednesday, March 18, 2026</div>
                 </div>
-                <div class="stat fade-in" style="animation-delay: 0.2s">
-                    <div class="stat-value">8</div>
-                    <div class="stat-label">Languages</div>
-                </div>
-                <div class="stat fade-in" style="animation-delay: 0.3s">
-                    <div class="stat-value">35K+</div>
-                    <div class="stat-label">Stars</div>
+                <div class="stats">
+                    <div class="stat">
+                        <div class="stat-value">15</div>
+                        <div class="stat-label">Repositories</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-value">8</div>
+                        <div class="stat-label">Languages</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-value">35K+</div>
+                        <div class="stat-label">Stars</div>
+                    </div>
                 </div>
             </div>
         </header>
         
-        <div class="filter-bar">
-            <button class="filter-btn active" onclick="filterByLanguage('all')">ALL</button>
-            <button class="filter-btn" onclick="filterByLanguage('TypeScript')">TypeScript</button>
-            <button class="filter-btn" onclick="filterByLanguage('Python')">Python</button>
-            <button class="filter-btn" onclick="filterByLanguage('JavaScript')">JavaScript</button>
-            <button class="filter-btn" onclick="filterByLanguage('Rust')">Rust</button>
-            <button class="filter-btn" onclick="filterByLanguage('Shell')">Shell</button>
-        </div>
+        <section class="filter-section">
+            <div class="filter-bar">
+                <button class="filter-btn active" onclick="filterByLanguage('all')">All</button>
+                <button class="filter-btn" onclick="filterByLanguage('TypeScript')">TypeScript</button>
+                <button class="filter-btn" onclick="filterByLanguage('Python')">Python</button>
+                <button class="filter-btn" onclick="filterByLanguage('JavaScript')">JavaScript</button>
+                <button class="filter-btn" onclick="filterByLanguage('Rust')">Rust</button>
+                <button class="filter-btn" onclick="filterByLanguage('Shell')">Shell</button>
+            </div>
+        </section>
         
-        <div class="projects-grid" id="projects-grid"></div>
+        <section class="projects-section">
+            <div class="projects-grid" id="projects-grid"></div>
+        </section>
         
         <footer>
-            <p>🤖 AUTO-GENERATED BY 太子 • POWERED BY GITHUB API</p>
-            <p style="margin-top: 12px;">
-                <a href="https://github.com/trending" target="_blank">GITHUB TRENDING</a> • 
-                <a href="https://github.com/fightingst/github-trending-daily" target="_blank">SOURCE CODE</a>
-            </p>
+            <div class="footer-content">
+                <div class="footer-text">
+                    Generated by 太子 · Data from GitHub API
+                </div>
+                <div class="footer-links">
+                    <a href="https://github.com/trending" target="_blank">GitHub Trending</a>
+                    <a href="https://github.com/fightingst/github-trending-daily" target="_blank">Source</a>
+                </div>
+            </div>
         </footer>
     </div>
     
     <script>
-        // 生成粒子
-        function createParticles() {
-            const container = document.getElementById('particles');
-            for (let i = 0; i < 30; i++) {
-                const particle = document.createElement('div');
-                particle.className = 'particle';
-                particle.style.left = Math.random() * 100 + '%';
-                particle.style.animationDuration = (10 + Math.random() * 20) + 's';
-                particle.style.animationDelay = Math.random() * 15 + 's';
-                container.appendChild(particle);
-            }
-        }
-        createParticles();
-        
         const projects = [
-            {"rank":1,"name":"NVIDIA/NemoClaw","full_name":"NemoClaw","author":"NVIDIA","desc":"NVIDIA 官方插件，用于安全安装 OpenClaw","stars":4308,"language":"TypeScript","url":"https://github.com/NVIDIA/NemoClaw"},
-            {"rank":2,"name":"aiming-lab/AutoResearchClaw","full_name":"AutoResearchClaw","author":"aiming-lab","desc":"全自主、自进化的研究系统——从想法到论文","stars":4210,"language":"Python","url":"https://github.com/aiming-lab/AutoResearchClaw"},
-            {"rank":3,"name":"calesthio/Crucix","full_name":"Crucix","author":"calesthio","desc":"个人智能代理，从多个数据源监控世界","stars":3089,"language":"JavaScript","url":"https://github.com/calesthio/Crucix"},
-            {"rank":4,"name":"webadderall/Recordly","full_name":"Recordly","author":"webadderall","desc":"免费开源的 Screen Studio 替代品","stars":2351,"language":"TypeScript","url":"https://github.com/webadderall/Recordly"},
-            {"rank":5,"name":"pasky/chrome-cdp-skill","full_name":"chrome-cdp-skill","author":"pasky","desc":"让 AI 代理访问你的 Chrome 浏览器会话","stars":2063,"language":"JavaScript","url":"https://github.com/pasky/chrome-cdp-skill"},
-            {"rank":6,"name":"Narcooo/inkos","full_name":"inkos","author":"Narcooo","desc":"自主小说写作 CLI 代理","stars":1451,"language":"TypeScript","url":"https://github.com/Narcooo/inkos"},
-            {"rank":7,"name":"MoonshotAI/Attention-Residuals","full_name":"Attention-Residuals","author":"MoonshotAI","desc":"Moonshot AI 出品","stars":1405,"language":"Unknown","url":"https://github.com/MoonshotAI/Attention-Residuals"},
-            {"rank":8,"name":"jackwener/opencli","full_name":"opencli","author":"jackwener","desc":"让任何网站成为你的 CLI","stars":1366,"language":"TypeScript","url":"https://github.com/jackwener/opencli"},
-            {"rank":9,"name":"skernelx/tavily-key-generator","full_name":"tavily-key-generator","author":"skernelx","desc":"Tavily 和 Firecrawl 注册自动化工具包","stars":1273,"language":"Python","url":"https://github.com/skernelx/tavily-key-generator"},
-            {"rank":10,"name":"uditgoenka/autoresearch","full_name":"autoresearch","author":"uditgoenka","desc":"Claude Autoresearch 技能——自主目标驱动迭代","stars":1177,"language":"Shell","url":"https://github.com/uditgoenka/autoresearch"},
-            {"rank":11,"name":"Infatoshi/OpenSquirrel","full_name":"OpenSquirrel","author":"Infatoshi","desc":"为被代理分心的人设计的 Claude Code 控制面板","stars":986,"language":"Rust","url":"https://github.com/Infatoshi/OpenSquirrel"},
-            {"rank":12,"name":"Lum1104/Understand-Anything","full_name":"Understand-Anything","author":"Lum1104","desc":"将任意代码库转换为可探索的交互式知识图谱","stars":722,"language":"TypeScript","url":"https://github.com/Lum1104/Understand-Anything"},
-            {"rank":13,"name":"karpathy/jobs","full_name":"jobs","author":"karpathy","desc":"可视化探索美国劳工统计局职业展望数据","stars":713,"language":"HTML","url":"https://github.com/karpathy/jobs"},
-            {"rank":14,"name":"Michaelliv/pi-generative-ui","full_name":"pi-generative-ui","author":"Michaelliv","desc":"Claude.ai 的生成式 UI——逆向工程重建","stars":707,"language":"TypeScript","url":"https://github.com/Michaelliv/pi-generative-ui"},
-            {"rank":15,"name":"CopilotKit/OpenGenerativeUI","full_name":"OpenGenerativeUI","author":"CopilotKit","desc":"开源生成式 UI 框架","stars":627,"language":"TypeScript","url":"https://github.com/CopilotKit/OpenGenerativeUI"}
+            {"rank":"01","name":"NemoClaw","author":"NVIDIA","desc":"NVIDIA plugin for secure installation of OpenClaw","stars":"4.3K","language":"TypeScript","url":"https://github.com/NVIDIA/NemoClaw"},
+            {"rank":"02","name":"AutoResearchClaw","author":"aiming-lab","desc":"Fully autonomous research from idea to paper","stars":"4.2K","language":"Python","url":"https://github.com/aiming-lab/AutoResearchClaw"},
+            {"rank":"03","name":"Crucix","author":"calesthio","desc":"Personal intelligence agent watching multiple data sources","stars":"3.1K","language":"JavaScript","url":"https://github.com/calesthio/Crucix"},
+            {"rank":"04","name":"Recordly","author":"webadderall","desc":"Open-source Screen Studio alternative with auto-zoom","stars":"2.4K","language":"TypeScript","url":"https://github.com/webadderall/Recordly"},
+            {"rank":"05","name":"chrome-cdp-skill","author":"pasky","desc":"Give AI agent access to your live Chrome session","stars":"2.1K","language":"JavaScript","url":"https://github.com/pasky/chrome-cdp-skill"},
+            {"rank":"06","name":"inkos","author":"Narcooo","desc":"Autonomous novel writing CLI agent","stars":"1.5K","language":"TypeScript","url":"https://github.com/Narcooo/inkos"},
+            {"rank":"07","name":"Attention-Residuals","author":"MoonshotAI","desc":"Moonshot AI research release","stars":"1.4K","language":"Unknown","url":"https://github.com/MoonshotAI/Attention-Residuals"},
+            {"rank":"08","name":"opencli","author":"jackwener","desc":"Make any website your CLI with AI-native runtime","stars":"1.4K","language":"TypeScript","url":"https://github.com/jackwener/opencli"},
+            {"rank":"09","name":"tavily-key-generator","author":"skernelx","desc":"Tavily and Firecrawl signup automation toolkit","stars":"1.3K","language":"Python","url":"https://github.com/skernelx/tavily-key-generator"},
+            {"rank":"10","name":"autoresearch","author":"uditgoenka","desc":"Claude Autoresearch Skill for goal-directed iteration","stars":"1.2K","language":"Shell","url":"https://github.com/uditgoenka/autoresearch"},
+            {"rank":"11","name":"OpenSquirrel","author":"Infatoshi","desc":"Claude Code control plane built with Rust/GPUI","stars":"1.0K","language":"Rust","url":"https://github.com/Infatoshi/OpenSquirrel"},
+            {"rank":"12","name":"Understand-Anything","author":"Lum1104","desc":"Turn any codebase into an interactive knowledge graph","stars":"722","language":"TypeScript","url":"https://github.com/Lum1104/Understand-Anything"},
+            {"rank":"13","name":"jobs","author":"karpathy","desc":"Visual explorer for Bureau of Labor Statistics data","stars":"713","language":"HTML","url":"https://github.com/karpathy/jobs"},
+            {"rank":"14","name":"pi-generative-ui","author":"Michaelliv","desc":"Claude.ai generative UI reverse-engineered for pi","stars":"707","language":"TypeScript","url":"https://github.com/Michaelliv/pi-generative-ui"},
+            {"rank":"15","name":"OpenGenerativeUI","author":"CopilotKit","desc":"Open-source generative UI framework","stars":"627","language":"TypeScript","url":"https://github.com/CopilotKit/OpenGenerativeUI"}
         ];
         
         const languageColors = {
@@ -626,53 +396,44 @@
             'Rust': '#dea584',
             'Shell': '#89e051',
             'HTML': '#e34c26',
-            'Unknown': '#6e7681'
+            'Unknown': '#94a3b8'
         };
-        
-        function formatStars(num) {
-            if (num >= 1000) {
-                return (num / 1000).toFixed(1) + 'K';
-            }
-            return num.toString();
-        }
         
         function renderProjects(filteredProjects) {
             const grid = document.getElementById('projects-grid');
             grid.innerHTML = '';
             
             filteredProjects.forEach((project, index) => {
-                const card = document.createElement('div');
-                card.className = 'project-card';
-                card.style.animationDelay = (index * 0.1) + 's';
-                
-                const isTop3 = project.rank <= 3;
+                const card = document.createElement('a');
+                card.href = project.url;
+                card.target = '_blank';
+                card.className = 'project-card fade-in';
+                card.style.animationDelay = (index * 0.03) + 's';
                 
                 card.innerHTML = `
-                    <div class="rank ${isTop3 ? 'top3' : ''}">${String(project.rank).padStart(2, '0')}</div>
                     <div class="project-header">
-                        <a href="${project.url}" target="_blank" class="project-name">${project.full_name}</a>
-                        <div class="project-author">by <span>${project.author}</span></div>
+                        <div class="project-info">
+                            <div class="project-name">${project.name}</div>
+                            <div class="project-author">${project.author}</div>
+                        </div>
+                        <div class="rank">${project.rank}</div>
                     </div>
                     <div class="project-desc">${project.desc}</div>
                     <div class="project-meta">
                         <div class="meta-item stars">
-                            <svg viewBox="0 0 16 16"><path d="M8 .25a.75.75 0 01.673.418l1.882 3.815 4.21.612a.75.75 0 01.416 1.279l-3.046 2.97.719 4.192a.75.75 0 01-1.088.791L8 12.347l-3.766 1.98a.75.75 0 01-1.088-.79l.72-4.194L.818 6.374a.75.75 0 01.416-1.28l4.21-.611L7.327.668A.75.75 0 018 .25z"/></svg>
-                            ${formatStars(project.stars)}
+                            <svg viewBox="0 0 16 16" fill="currentColor">
+                                <path d="M8 .25a.75.75 0 01.673.418l1.882 3.815 4.21.612a.75.75 0 01.416 1.279l-3.046 2.97.719 4.192a.75.75 0 01-1.088.791L8 12.347l-3.766 1.98a.75.75 0 01-1.088-.79l.72-4.194L.818 6.374a.75.75 0 01.416-1.28l4.21-.611L7.327.668A.75.75 0 018 .25z"/>
+                            </svg>
+                            ${project.stars}
                         </div>
-                        <div class="meta-item language">
-                            <span class="language-dot" style="background-color: ${languageColors[project.language] || '#6e7681'}; color: ${languageColors[project.language] || '#6e7681'}"></span>
+                        <div class="meta-item">
+                            <span class="language-dot" style="background-color: ${languageColors[project.language]}"></span>
                             ${project.language}
                         </div>
                     </div>
                 `;
                 
                 grid.appendChild(card);
-                
-                // 触发动画
-                setTimeout(() => {
-                    card.style.opacity = '1';
-                    card.style.transform = 'translateY(0)';
-                }, 50);
             });
         }
         
@@ -685,12 +446,10 @@
             if (language === 'all') {
                 renderProjects(projects);
             } else {
-                const filtered = projects.filter(p => p.language === language);
-                renderProjects(filtered);
+                renderProjects(projects.filter(p => p.language === language));
             }
         }
         
-        // 初始渲染
         renderProjects(projects);
     </script>
 </body>
