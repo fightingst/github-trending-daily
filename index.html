@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GitHub Trending 日报 - 2026年03月18日</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            min-height: 100vh;
+            color: #e0e0e0;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            text-align: center;
+            padding: 40px 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 16px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 40px rgba(102, 126, 234, 0.3);
+        }
+        
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            color: #fff;
+        }
+        
+        header .date {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            color: #fff;
+        }
+        
+        header .subtitle {
+            margin-top: 15px;
+            font-size: 0.95rem;
+            opacity: 0.8;
+            color: #fff;
+        }
+        
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 20px;
+        }
+        
+        .stat-item {
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #ffd700;
+        }
+        
+        .stat-label {
+            font-size: 0.85rem;
+            opacity: 0.8;
+            color: #fff;
+        }
+        
+        .filter-bar {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .filter-btn {
+            padding: 8px 20px;
+            border: none;
+            border-radius: 20px;
+            background: rgba(255,255,255,0.1);
+            color: #e0e0e0;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 0.9rem;
+        }
+        
+        .filter-btn:hover, .filter-btn.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #fff;
+        }
+        
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 20px;
+        }
+        
+        .project-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            padding: 20px;
+            transition: all 0.3s;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.1);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+        }
+        
+        .rank {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 0.85rem;
+        }
+        
+        .rank.top3 {
+            background: linear-gradient(135deg, #ffd700 0%, #ffaa00 100%);
+            color: #1a1a2e;
+        }
+        
+        .project-header {
+            margin-bottom: 15px;
+            padding-right: 40px;
+        }
+        
+        .project-name {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #667eea;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 5px;
+            word-break: break-all;
+        }
+        
+        .project-name:hover {
+            text-decoration: underline;
+        }
+        
+        .project-author {
+            font-size: 0.85rem;
+            color: #888;
+        }
+        
+        .project-desc {
+            font-size: 0.9rem;
+            color: #aaa;
+            line-height: 1.5;
+            margin-bottom: 15px;
+            min-height: 60px;
+        }
+        
+        .project-meta {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 0.85rem;
+            color: #888;
+        }
+        
+        .meta-item svg {
+            width: 16px;
+            height: 16px;
+        }
+        
+        .language-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            display: inline-block;
+        }
+        
+        .stars {
+            color: #ffd700;
+            font-weight: 600;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            margin-top: 40px;
+            color: #666;
+            font-size: 0.85rem;
+        }
+        
+        footer a {
+            color: #667eea;
+            text-decoration: none;
+        }
+        
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 1.8rem;
+            }
+            
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .stats {
+                gap: 15px;
+            }
+            
+            .stat-number {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🔥 GitHub Trending</h1>
+            <div class="date">2026年03月18日</div>
+            <div class="subtitle">每日精选 · 热门开源项目</div>
+            <div class="stats">
+                <div class="stat-item">
+                    <div class="stat-number">25</div>
+                    <div class="stat-label">热门项目</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">8</div>
+                    <div class="stat-label">编程语言</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">35K+</div>
+                    <div class="stat-label">总星标</div>
+                </div>
+            </div>
+        </header>
+        
+        <div class="filter-bar">
+            <button class="filter-btn active" onclick="filterByLanguage('all')">全部</button>
+            <button class="filter-btn" onclick="filterByLanguage('TypeScript')">TypeScript</button>
+            <button class="filter-btn" onclick="filterByLanguage('Python')">Python</button>
+            <button class="filter-btn" onclick="filterByLanguage('JavaScript')">JavaScript</button>
+            <button class="filter-btn" onclick="filterByLanguage('Rust')">Rust</button>
+            <button class="filter-btn" onclick="filterByLanguage('Shell')">Shell</button>
+        </div>
+        
+        <div class="projects-grid" id="projects-grid">
+            <!-- 项目卡片将由 JavaScript 动态生成 -->
+        </div>
+        
+        <footer>
+            <p>🤖 由太子自动生成 | 数据来源: GitHub API</p>
+            <p style="margin-top: 10px;">
+                <a href="https://github.com/trending" target="_blank">查看 GitHub Trending</a>
+            </p>
+        </footer>
+    </div>
+    
+    <script>
+        const projects = [
+            {"rank":1,"name":"NVIDIA/NemoClaw","full_name":"NemoClaw","author":"NVIDIA","desc":"NVIDIA 官方插件，用于安全安装 OpenClaw","stars":4308,"language":"TypeScript","url":"https://github.com/NVIDIA/NemoClaw"},
+            {"rank":2,"name":"aiming-lab/AutoResearchClaw","full_name":"AutoResearchClaw","author":"aiming-lab","desc":"全自主、自进化的研究系统——从想法到论文，聊个想法，拿篇论文","stars":4210,"language":"Python","url":"https://github.com/aiming-lab/AutoResearchClaw"},
+            {"rank":3,"name":"calesthio/Crucix","full_name":"Crucix","author":"calesthio","desc":"个人智能代理，从多个数据源监控世界，重要事件主动提醒","stars":3089,"language":"JavaScript","url":"https://github.com/calesthio/Crucix"},
+            {"rank":4,"name":"webadderall/Recordly","full_name":"Recordly","author":"webadderall","desc":"免费开源的 Screen Studio 替代品，支持自动缩放、光标动画等功能","stars":2351,"language":"TypeScript","url":"https://github.com/webadderall/Recordly"},
+            {"rank":5,"name":"pasky/chrome-cdp-skill","full_name":"chrome-cdp-skill","author":"pasky","desc":"让 AI 代理访问你的 Chrome 浏览器会话，开箱即用","stars":2063,"language":"JavaScript","url":"https://github.com/pasky/chrome-cdp-skill"},
+            {"rank":6,"name":"Narcooo/inkos","full_name":"inkos","author":"Narcooo","desc":"自主小说写作 CLI 代理——AI 代理写作、审核、修订小说","stars":1451,"language":"TypeScript","url":"https://github.com/Narcooo/inkos"},
+            {"rank":7,"name":"MoonshotAI/Attention-Residuals","full_name":"Attention-Residuals","author":"MoonshotAI","desc":"Moonshot AI 出品（暂无简介）","stars":1405,"language":"Unknown","url":"https://github.com/MoonshotAI/Attention-Residuals"},
+            {"rank":8,"name":"jackwener/opencli","full_name":"opencli","author":"jackwener","desc":"让任何网站成为你的 CLI，AI 原生运行时，无缝浏览器自动化","stars":1366,"language":"TypeScript","url":"https://github.com/jackwener/opencli"},
+            {"rank":9,"name":"skernelx/tavily-key-generator","full_name":"tavily-key-generator","author":"skernelx","desc":"Tavily 和 Firecrawl 注册自动化工具包，支持密钥验证","stars":1273,"language":"Python","url":"https://github.com/skernelx/tavily-key-generator"},
+            {"rank":10,"name":"uditgoenka/autoresearch","full_name":"autoresearch","author":"uditgoenka","desc":"Claude Autoresearch 技能——自主目标驱动迭代，灵感来自 Karpathy","stars":1177,"language":"Shell","url":"https://github.com/uditgoenka/autoresearch"},
+            {"rank":11,"name":"Infatoshi/OpenSquirrel","full_name":"OpenSquirrel","author":"Infatoshi","desc":"为被代理分心的人设计的 Claude Code 控制面板","stars":986,"language":"Rust","url":"https://github.com/Infatoshi/OpenSquirrel"},
+            {"rank":12,"name":"upper-up/meta-lobbying-and-other-findings","full_name":"meta-lobbying-and-other-findings","author":"upper-up","desc":"暂无简介","stars":764,"language":"HTML","url":"https://github.com/upper-up/meta-lobbying-and-other-findings"},
+            {"rank":13,"name":"Lum1104/Understand-Anything","full_name":"Understand-Anything","author":"Lum1104","desc":"Claude Code 技能，将任意代码库转换为可探索的交互式知识图谱","stars":722,"language":"TypeScript","url":"https://github.com/Lum1104/Understand-Anything"},
+            {"rank":14,"name":"karpathy/jobs","full_name":"jobs","author":"karpathy","desc":"可视化探索美国劳工统计局职业展望手册数据的研究工具","stars":713,"language":"HTML","url":"https://github.com/karpathy/jobs"},
+            {"rank":15,"name":"Michaelliv/pi-generative-ui","full_name":"pi-generative-ui","author":"Michaelliv","desc":"Claude.ai 的生成式 UI——逆向工程重建，支持原生 HTML/SVG 小部件","stars":707,"language":"TypeScript","url":"https://github.com/Michaelliv/pi-generative-ui"}
+        ];
+        
+        const languageColors = {
+            'TypeScript': '#3178c6',
+            'Python': '#3572A5',
+            'JavaScript': '#f1e05a',
+            'Rust': '#dea584',
+            'Shell': '#89e051',
+            'HTML': '#e34c26',
+            'Unknown': '#6e7681'
+        };
+        
+        function formatStars(num) {
+            if (num >= 1000) {
+                return (num / 1000).toFixed(1) + 'K';
+            }
+            return num.toString();
+        }
+        
+        function renderProjects(filteredProjects) {
+            const grid = document.getElementById('projects-grid');
+            grid.innerHTML = '';
+            
+            filteredProjects.forEach(project => {
+                const card = document.createElement('div');
+                card.className = 'project-card';
+                card.dataset.language = project.language;
+                
+                const isTop3 = project.rank <= 3;
+                
+                card.innerHTML = `
+                    <div class="rank ${isTop3 ? 'top3' : ''}">${project.rank}</div>
+                    <div class="project-header">
+                        <a href="${project.url}" target="_blank" class="project-name">${project.full_name}</a>
+                        <div class="project-author">by ${project.author}</div>
+                    </div>
+                    <div class="project-desc">${project.desc}</div>
+                    <div class="project-meta">
+                        <div class="meta-item stars">
+                            <svg viewBox="0 0 16 16" fill="currentColor">
+                                <path d="M8 .25a.75.75 0 01.673.418l1.882 3.815 4.21.612a.75.75 0 01.416 1.279l-3.046 2.97.719 4.192a.75.75 0 01-1.088.791L8 12.347l-3.766 1.98a.75.75 0 01-1.088-.79l.72-4.194L.818 6.374a.75.75 0 01.416-1.28l4.21-.611L7.327.668A.75.75 0 018 .25z"/>
+                            </svg>
+                            ${formatStars(project.stars)}
+                        </div>
+                        <div class="meta-item">
+                            <span class="language-dot" style="background-color: ${languageColors[project.language] || '#6e7681'}"></span>
+                            ${project.language}
+                        </div>
+                    </div>
+                `;
+                
+                grid.appendChild(card);
+            });
+        }
+        
+        function filterByLanguage(language) {
+            // 更新按钮状态
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            // 过滤项目
+            if (language === 'all') {
+                renderProjects(projects);
+            } else {
+                const filtered = projects.filter(p => p.language === language);
+                renderProjects(filtered);
+            }
+        }
+        
+        // 初始渲染
+        renderProjects(projects);
+    </script>
+</body>
+</html>
