@@ -6,7 +6,7 @@
     <title>GitHub Trending 日报 - 2026年03月18日</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -15,139 +15,289 @@
         }
         
         :root {
-            /* Deep Ocean 配色方案 - 来自 ui-ux-pro-max-plus */
-            --bg-primary: #0c4a6e;
-            --bg-surface: #075985;
-            --bg-card: #0f172a;
-            --color-primary: #38bdf8;
-            --color-secondary: #7dd3fc;
-            --color-accent: #f472b6;
-            --color-text: #f0f9ff;
-            --color-text-muted: #7dd3fc;
-            --color-border: #1e40af;
-            --color-success: #22c55e;
-            --color-warning: #fbbf24;
+            --bg-dark: #030712;
+            --bg-card: rgba(15, 23, 42, 0.6);
+            --neon-cyan: #00f5ff;
+            --neon-pink: #ff00ff;
+            --neon-purple: #bf00ff;
+            --neon-green: #00ff88;
+            --neon-yellow: #ffff00;
+            --text-primary: #ffffff;
+            --text-secondary: rgba(255, 255, 255, 0.7);
+            --text-muted: rgba(255, 255, 255, 0.5);
         }
         
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: linear-gradient(135deg, var(--bg-primary) 0%, #0f172a 100%);
+            font-family: 'Space Grotesk', -apple-system, sans-serif;
+            background: var(--bg-dark);
             min-height: 100vh;
-            color: var(--color-text);
-            line-height: 1.6;
+            color: var(--text-primary);
+            overflow-x: hidden;
+            position: relative;
+        }
+        
+        /* 动态网格背景 */
+        .grid-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(0, 245, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 245, 255, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: gridMove 20s linear infinite;
+            pointer-events: none;
+            z-index: 0;
+        }
+        
+        @keyframes gridMove {
+            0% { transform: perspective(500px) rotateX(60deg) translateY(0); }
+            100% { transform: perspective(500px) rotateX(60deg) translateY(50px); }
+        }
+        
+        /* 扫描线效果 */
+        .scanline {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, transparent, var(--neon-cyan), transparent);
+            animation: scanline 3s linear infinite;
+            pointer-events: none;
+            z-index: 100;
+            opacity: 0.5;
+        }
+        
+        @keyframes scanline {
+            0% { top: -4px; }
+            100% { top: 100%; }
+        }
+        
+        /* 浮动粒子 */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            overflow: hidden;
+        }
+        
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            border-radius: 50%;
+            background: var(--neon-cyan);
+            box-shadow: 0 0 10px var(--neon-cyan), 0 0 20px var(--neon-cyan);
+            animation: float 15s infinite;
+            opacity: 0.6;
+        }
+        
+        .particle:nth-child(2n) {
+            background: var(--neon-pink);
+            box-shadow: 0 0 10px var(--neon-pink), 0 0 20px var(--neon-pink);
+        }
+        
+        .particle:nth-child(3n) {
+            background: var(--neon-purple);
+            box-shadow: 0 0 10px var(--neon-purple), 0 0 20px var(--neon-purple);
+        }
+        
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.6;
+            }
+            90% {
+                opacity: 0.6;
+            }
+            100% {
+                transform: translateY(-100vh) rotate(720deg);
+                opacity: 0;
+            }
         }
         
         .container {
-            max-width: 1280px;
+            position: relative;
+            z-index: 10;
+            max-width: 1400px;
             margin: 0 auto;
-            padding: 24px;
+            padding: 40px 24px;
         }
         
-        /* Header - 现代企业风格 */
+        /* Header - 霓虹风格 */
         header {
             text-align: center;
-            padding: 48px 24px;
-            background: linear-gradient(135deg, rgba(56, 189, 248, 0.1) 0%, rgba(125, 211, 252, 0.05) 100%);
-            border-radius: 16px;
-            margin-bottom: 32px;
-            border: 1px solid rgba(56, 189, 248, 0.2);
-            backdrop-filter: blur(10px);
+            padding: 60px 24px;
+            margin-bottom: 40px;
+            position: relative;
+        }
+        
+        .header-glow {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 600px;
+            height: 300px;
+            background: radial-gradient(ellipse, rgba(0, 245, 255, 0.15) 0%, transparent 70%);
+            pointer-events: none;
+            animation: pulse 4s ease-in-out infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 0.5; transform: translate(-50%, -50%) scale(1); }
+            50% { opacity: 1; transform: translate(-50%, -50%) scale(1.1); }
         }
         
         header h1 {
-            font-size: 2.75rem;
+            font-size: 4rem;
             font-weight: 700;
-            margin-bottom: 8px;
-            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-accent) 100%);
+            font-family: 'JetBrains Mono', monospace;
+            letter-spacing: -2px;
+            position: relative;
+            display: inline-block;
+            background: linear-gradient(135deg, var(--neon-cyan) 0%, var(--neon-pink) 50%, var(--neon-purple) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            animation: titleGlow 3s ease-in-out infinite;
+        }
+        
+        @keyframes titleGlow {
+            0%, 100% { filter: drop-shadow(0 0 20px rgba(0, 245, 255, 0.5)); }
+            50% { filter: drop-shadow(0 0 40px rgba(255, 0, 255, 0.5)); }
         }
         
         .date {
-            font-size: 1.125rem;
-            color: var(--color-text-muted);
-            margin-bottom: 16px;
+            font-size: 1.25rem;
+            color: var(--neon-cyan);
+            margin-top: 16px;
+            font-family: 'JetBrains Mono', monospace;
+            text-shadow: 0 0 10px var(--neon-cyan);
         }
         
         .stats {
             display: flex;
             justify-content: center;
-            gap: 48px;
-            margin-top: 24px;
+            gap: 60px;
+            margin-top: 40px;
         }
         
         .stat {
             text-align: center;
+            position: relative;
+            padding: 20px 30px;
+            background: var(--bg-card);
+            border: 1px solid rgba(0, 245, 255, 0.2);
+            border-radius: 12px;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+        
+        .stat:hover {
+            border-color: var(--neon-cyan);
+            box-shadow: 0 0 30px rgba(0, 245, 255, 0.3);
+            transform: translateY(-4px);
         }
         
         .stat-value {
-            font-size: 2rem;
+            font-size: 2.5rem;
             font-weight: 700;
-            color: var(--color-primary);
+            font-family: 'JetBrains Mono', monospace;
+            background: linear-gradient(135deg, var(--neon-cyan), var(--neon-green));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
         
         .stat-label {
             font-size: 0.875rem;
-            color: var(--color-text-muted);
+            color: var(--text-secondary);
             margin-top: 4px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
         }
         
         /* Filter Bar */
         .filter-bar {
             display: flex;
             justify-content: center;
-            gap: 8px;
-            margin-bottom: 32px;
+            gap: 12px;
+            margin-bottom: 40px;
             flex-wrap: wrap;
-            padding: 0 16px;
         }
         
         .filter-btn {
-            padding: 10px 20px;
-            border: 1px solid var(--color-border);
-            border-radius: 24px;
+            padding: 12px 24px;
+            border: 1px solid rgba(0, 245, 255, 0.3);
+            border-radius: 30px;
             background: transparent;
-            color: var(--color-text-muted);
+            color: var(--text-secondary);
             cursor: pointer;
-            transition: all 0.2s ease;
+            transition: all 0.3s ease;
             font-size: 0.875rem;
             font-weight: 500;
+            font-family: 'JetBrains Mono', monospace;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .filter-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 245, 255, 0.2), transparent);
+            transition: left 0.5s ease;
+        }
+        
+        .filter-btn:hover::before {
+            left: 100%;
         }
         
         .filter-btn:hover {
-            border-color: var(--color-primary);
-            color: var(--color-text);
+            border-color: var(--neon-cyan);
+            color: var(--text-primary);
+            box-shadow: 0 0 20px rgba(0, 245, 255, 0.2);
         }
         
         .filter-btn.active {
-            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-accent) 100%);
+            background: linear-gradient(135deg, var(--neon-cyan) 0%, var(--neon-purple) 100%);
             border-color: transparent;
-            color: white;
+            color: var(--bg-dark);
+            font-weight: 600;
+            box-shadow: 0 0 30px rgba(0, 245, 255, 0.4);
         }
         
         /* Projects Grid */
         .projects-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+            gap: 24px;
         }
         
-        /* Project Card - 玻璃拟态风格 */
+        /* Project Card - 赛博朋克风格 */
         .project-card {
-            background: rgba(15, 23, 42, 0.8);
-            border-radius: 12px;
-            padding: 24px;
-            border: 1px solid rgba(56, 189, 248, 0.1);
-            transition: all 0.3s ease;
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 28px;
+            border: 1px solid rgba(0, 245, 255, 0.1);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             position: relative;
-            backdrop-filter: blur(8px);
-        }
-        
-        .project-card:hover {
-            transform: translateY(-4px);
-            border-color: rgba(56, 189, 248, 0.3);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(12px);
+            overflow: hidden;
         }
         
         .project-card::before {
@@ -156,76 +306,117 @@
             top: 0;
             left: 0;
             right: 0;
-            height: 3px;
-            background: linear-gradient(90deg, var(--color-primary), var(--color-accent));
-            border-radius: 12px 12px 0 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--neon-cyan), var(--neon-pink), var(--neon-purple));
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
+        }
+        
+        .project-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(0, 245, 255, 0.05) 0%, transparent 50%);
             opacity: 0;
-            transition: opacity 0.3s;
+            transition: opacity 0.4s ease;
+            pointer-events: none;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            border-color: rgba(0, 245, 255, 0.3);
+            box-shadow: 
+                0 20px 40px rgba(0, 0, 0, 0.4),
+                0 0 40px rgba(0, 245, 255, 0.1),
+                inset 0 0 40px rgba(0, 245, 255, 0.05);
         }
         
         .project-card:hover::before {
+            transform: scaleX(1);
+        }
+        
+        .project-card:hover::after {
             opacity: 1;
         }
         
         .rank {
             position: absolute;
-            top: 16px;
-            right: 16px;
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
-            background: var(--bg-surface);
+            top: 20px;
+            right: 20px;
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
+            background: rgba(0, 245, 255, 0.1);
+            border: 1px solid rgba(0, 245, 255, 0.3);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-weight: 600;
+            font-weight: 700;
             font-size: 0.875rem;
-            color: var(--color-text-muted);
-            border: 1px solid var(--color-border);
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--neon-cyan);
         }
         
         .rank.top3 {
-            background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
-            color: #1e293b;
+            background: linear-gradient(135deg, var(--neon-yellow) 0%, var(--neon-cyan) 100%);
             border: none;
+            color: var(--bg-dark);
+            box-shadow: 0 0 20px rgba(255, 255, 0, 0.4);
+            animation: rankGlow 2s ease-in-out infinite;
+        }
+        
+        @keyframes rankGlow {
+            0%, 100% { box-shadow: 0 0 20px rgba(255, 255, 0, 0.4); }
+            50% { box-shadow: 0 0 30px rgba(255, 255, 0, 0.6); }
         }
         
         .project-header {
-            margin-bottom: 12px;
-            padding-right: 44px;
+            margin-bottom: 16px;
+            padding-right: 50px;
         }
         
         .project-name {
-            font-size: 1rem;
+            font-size: 1.125rem;
             font-weight: 600;
-            color: var(--color-text);
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--text-primary);
             text-decoration: none;
             display: block;
-            margin-bottom: 4px;
+            margin-bottom: 6px;
             word-break: break-all;
-            transition: color 0.2s;
+            transition: all 0.3s ease;
+            position: relative;
         }
         
         .project-name:hover {
-            color: var(--color-primary);
+            color: var(--neon-cyan);
+            text-shadow: 0 0 10px var(--neon-cyan);
         }
         
         .project-author {
             font-size: 0.8125rem;
-            color: var(--color-text-muted);
+            color: var(--text-muted);
+            font-family: 'JetBrains Mono', monospace;
+        }
+        
+        .project-author span {
+            color: var(--neon-pink);
         }
         
         .project-desc {
-            font-size: 0.875rem;
-            color: rgba(240, 249, 255, 0.7);
-            line-height: 1.5;
-            margin-bottom: 16px;
+            font-size: 0.9375rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 20px;
             min-height: 52px;
         }
         
         .project-meta {
             display: flex;
-            gap: 16px;
+            gap: 20px;
             flex-wrap: wrap;
             align-items: center;
         }
@@ -233,58 +424,80 @@
         .meta-item {
             display: flex;
             align-items: center;
-            gap: 6px;
-            font-size: 0.8125rem;
+            gap: 8px;
+            font-size: 0.875rem;
+            font-family: 'JetBrains Mono', monospace;
         }
         
         .stars {
-            color: #fbbf24;
+            color: var(--neon-yellow);
             font-weight: 600;
+            text-shadow: 0 0 10px rgba(255, 255, 0, 0.5);
         }
         
         .stars svg {
-            width: 14px;
-            height: 14px;
+            width: 16px;
+            height: 16px;
             fill: currentColor;
+            animation: starPulse 1.5s ease-in-out infinite;
+        }
+        
+        @keyframes starPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
         }
         
         .language {
             display: flex;
             align-items: center;
-            gap: 6px;
-            color: var(--color-text-muted);
+            gap: 8px;
+            color: var(--text-secondary);
         }
         
         .language-dot {
-            width: 10px;
-            height: 10px;
+            width: 12px;
+            height: 12px;
             border-radius: 50%;
+            box-shadow: 0 0 10px currentColor;
         }
         
         /* Footer */
         footer {
             text-align: center;
-            padding: 48px 24px;
-            margin-top: 48px;
-            color: var(--color-text-muted);
+            padding: 60px 24px;
+            margin-top: 60px;
+            color: var(--text-muted);
             font-size: 0.875rem;
-            border-top: 1px solid rgba(56, 189, 248, 0.1);
+            border-top: 1px solid rgba(0, 245, 255, 0.1);
+            position: relative;
+        }
+        
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 200px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--neon-cyan), transparent);
         }
         
         footer a {
-            color: var(--color-primary);
+            color: var(--neon-cyan);
             text-decoration: none;
-            transition: color 0.2s;
+            transition: all 0.3s ease;
         }
         
         footer a:hover {
-            color: var(--color-accent);
+            color: var(--neon-pink);
+            text-shadow: 0 0 10px var(--neon-pink);
         }
         
         /* 响应式设计 */
         @media (max-width: 768px) {
             header h1 {
-                font-size: 2rem;
+                font-size: 2.5rem;
             }
             
             .projects-grid {
@@ -292,55 +505,69 @@
             }
             
             .stats {
-                gap: 24px;
+                gap: 20px;
+                flex-wrap: wrap;
             }
             
             .stat-value {
-                font-size: 1.5rem;
+                font-size: 2rem;
             }
             
             .filter-bar {
-                gap: 6px;
+                gap: 8px;
             }
             
             .filter-btn {
-                padding: 8px 16px;
+                padding: 10px 18px;
                 font-size: 0.8125rem;
             }
         }
         
-        /* 深色模式优化 */
-        @media (prefers-color-scheme: dark) {
-            :root {
-                --bg-primary: #09090b;
-                --bg-surface: #0f172a;
-            }
+        /* 加载动画 */
+        .fade-in {
+            animation: fadeIn 0.6s ease forwards;
+            opacity: 0;
+        }
+        
+        @keyframes fadeIn {
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .project-card {
+            opacity: 0;
+            transform: translateY(20px);
         }
     </style>
 </head>
 <body>
+    <!-- 背景效果 -->
+    <div class="grid-bg"></div>
+    <div class="scanline"></div>
+    <div class="particles" id="particles"></div>
+    
     <div class="container">
         <header>
-            <h1>🔥 GitHub Trending</h1>
-            <div class="date">2026年03月18日 · 每日精选</div>
+            <div class="header-glow"></div>
+            <h1>🔥 GITHUB TRENDING</h1>
+            <div class="date">// 2026.03.18 • DAILY DIGEST</div>
             <div class="stats">
-                <div class="stat">
+                <div class="stat fade-in" style="animation-delay: 0.1s">
                     <div class="stat-value">15</div>
-                    <div class="stat-label">热门项目</div>
+                    <div class="stat-label">Projects</div>
                 </div>
-                <div class="stat">
+                <div class="stat fade-in" style="animation-delay: 0.2s">
                     <div class="stat-value">8</div>
-                    <div class="stat-label">编程语言</div>
+                    <div class="stat-label">Languages</div>
                 </div>
-                <div class="stat">
+                <div class="stat fade-in" style="animation-delay: 0.3s">
                     <div class="stat-value">35K+</div>
-                    <div class="stat-label">总星标</div>
+                    <div class="stat-label">Stars</div>
                 </div>
             </div>
         </header>
         
         <div class="filter-bar">
-            <button class="filter-btn active" onclick="filterByLanguage('all')">全部</button>
+            <button class="filter-btn active" onclick="filterByLanguage('all')">ALL</button>
             <button class="filter-btn" onclick="filterByLanguage('TypeScript')">TypeScript</button>
             <button class="filter-btn" onclick="filterByLanguage('Python')">Python</button>
             <button class="filter-btn" onclick="filterByLanguage('JavaScript')">JavaScript</button>
@@ -351,15 +578,29 @@
         <div class="projects-grid" id="projects-grid"></div>
         
         <footer>
-            <p>🤖 由太子自动生成 | 数据来源: GitHub API</p>
-            <p style="margin-top: 8px;">
-                <a href="https://github.com/trending" target="_blank">查看 GitHub Trending</a> · 
-                <a href="https://github.com/fightingst/github-trending-daily" target="_blank">查看源码</a>
+            <p>🤖 AUTO-GENERATED BY 太子 • POWERED BY GITHUB API</p>
+            <p style="margin-top: 12px;">
+                <a href="https://github.com/trending" target="_blank">GITHUB TRENDING</a> • 
+                <a href="https://github.com/fightingst/github-trending-daily" target="_blank">SOURCE CODE</a>
             </p>
         </footer>
     </div>
     
     <script>
+        // 生成粒子
+        function createParticles() {
+            const container = document.getElementById('particles');
+            for (let i = 0; i < 30; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDuration = (10 + Math.random() * 20) + 's';
+                particle.style.animationDelay = Math.random() * 15 + 's';
+                container.appendChild(particle);
+            }
+        }
+        createParticles();
+        
         const projects = [
             {"rank":1,"name":"NVIDIA/NemoClaw","full_name":"NemoClaw","author":"NVIDIA","desc":"NVIDIA 官方插件，用于安全安装 OpenClaw","stars":4308,"language":"TypeScript","url":"https://github.com/NVIDIA/NemoClaw"},
             {"rank":2,"name":"aiming-lab/AutoResearchClaw","full_name":"AutoResearchClaw","author":"aiming-lab","desc":"全自主、自进化的研究系统——从想法到论文","stars":4210,"language":"Python","url":"https://github.com/aiming-lab/AutoResearchClaw"},
@@ -399,18 +640,18 @@
             const grid = document.getElementById('projects-grid');
             grid.innerHTML = '';
             
-            filteredProjects.forEach(project => {
+            filteredProjects.forEach((project, index) => {
                 const card = document.createElement('div');
                 card.className = 'project-card';
-                card.dataset.language = project.language;
+                card.style.animationDelay = (index * 0.1) + 's';
                 
                 const isTop3 = project.rank <= 3;
                 
                 card.innerHTML = `
-                    <div class="rank ${isTop3 ? 'top3' : ''}">${project.rank}</div>
+                    <div class="rank ${isTop3 ? 'top3' : ''}">${String(project.rank).padStart(2, '0')}</div>
                     <div class="project-header">
                         <a href="${project.url}" target="_blank" class="project-name">${project.full_name}</a>
-                        <div class="project-author">by ${project.author}</div>
+                        <div class="project-author">by <span>${project.author}</span></div>
                     </div>
                     <div class="project-desc">${project.desc}</div>
                     <div class="project-meta">
@@ -419,13 +660,19 @@
                             ${formatStars(project.stars)}
                         </div>
                         <div class="meta-item language">
-                            <span class="language-dot" style="background-color: ${languageColors[project.language] || '#6e7681'}"></span>
+                            <span class="language-dot" style="background-color: ${languageColors[project.language] || '#6e7681'}; color: ${languageColors[project.language] || '#6e7681'}"></span>
                             ${project.language}
                         </div>
                     </div>
                 `;
                 
                 grid.appendChild(card);
+                
+                // 触发动画
+                setTimeout(() => {
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, 50);
             });
         }
         
